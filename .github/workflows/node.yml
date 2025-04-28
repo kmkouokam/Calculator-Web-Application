@@ -28,3 +28,7 @@ jobs:
           port: 80
           index: index.html
           root: ./dist
+      - uses: actions/css-action@v1
+        with:
+          args: -p 80:80
+          port: 80    
