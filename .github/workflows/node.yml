@@ -20,6 +20,10 @@ jobs:
           node-version: "latest"
           cache: "npm"
           cache-dependency-path: package-lock.json
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}   
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
