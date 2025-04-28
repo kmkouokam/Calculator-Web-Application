@@ -23,7 +23,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
-      - uses: actions/setup-http-server@v1
+      - uses: Eun/http-server-action@v1
         with:
           port: 80
           index: index.html
