@@ -28,15 +28,14 @@ jobs:
           port: 80
           index: index.html
           root: ./dist
-      - uses: actions/css-action@v1
+      - uses: anishathalye/proof-html@v2
         with:
-          args: -p 80:80
-          port: 80    
-          style: "style.css"
-      - uses: actions/serve-action@v1
-        with:
-          args: -p 80:80
-          port: 80
-          root: ./dist
-          index: index.html
+          directory: ./ # Directory to serve files from
+          check_html: true # Check HTML files for errors
+          check_links: true # Check links in HTML files
+          check_css: true # Check CSS files for errors
+          check_js: true # Check JS files for errors
+          enforce_https: true # Enforce HTTPS for links
+          check_images: true # Check images for errors
+         
       
