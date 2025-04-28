@@ -32,3 +32,11 @@ jobs:
         with:
           args: -p 80:80
           port: 80    
+          style: "style.css"
+      - uses: actions/serve-action@v1
+        with:
+          args: -p 80:80
+          port: 80
+          root: ./dist
+          index: index.html
+      
