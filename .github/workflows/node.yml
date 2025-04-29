@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 20 # Node.js version to use
           cache: "npm"
-          cache-dependency-path: '**/package-lock.json' # Path to package-lock.json file for caching
+          cache-dependency-path:  '${{github.repository}}/ui/glypheditor/package-lock.json' # Path to the package-lock.json file for caching dependencies
      
       - name: Get npm cache directory
         id: npm-cache-dir
