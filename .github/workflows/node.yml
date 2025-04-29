@@ -38,10 +38,11 @@ jobs:
             ${{ runner.os }}-yarn- 
 
       - run: npm ci
+      - run: npm install --force # Install dependencies
       - name: Get yarn cache directory
         id: yarn-cache-dir
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-        
+
       - run: cd ui/glypheditor
       - run: npm run start
       - run: npm run build --if-present
