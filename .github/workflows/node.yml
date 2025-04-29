@@ -19,7 +19,10 @@ jobs:
         with:
           node-version: 20 # Node.js version to use
           cache: "npm"
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: '**/package-lock.json' # Path to package-lock.json file for caching
+      - name: Get yarn cache directory
+        id: yarn-cache-dir
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - name: Get npm cache directory
         id: npm-cache-dir
         shell: bash
