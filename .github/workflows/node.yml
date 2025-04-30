@@ -23,6 +23,11 @@ jobs:
         run: |
            node script.js
 
+      - name: test the code 
+        run: |
+           node test.js
+               
+
 
       # - run: npm ci
       # - run: npm install --force # Install dependencies
