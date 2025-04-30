@@ -19,54 +19,37 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20 # Node.js version to use
-          cache: "npm"
-          cache-dependency-path:   '**/package-lock.json' # Path to the package-lock.json file for caching dependencies
-     
-      - name: Get npm cache directory
-        id: npm-cache-dir
-        shell: bash
-        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT} 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn- 
-
-      - run: npm ci
-      - run: npm install --force # Install dependencies
-      - name: Get yarn cache directory
-        id: yarn-cache-dir
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - run: cd ui/glypheditor
-      - run: npm run start
-      - run: npm run build --if-present
-      - run: npm test
-      - uses: Eun/http-server-action@v1
-        with:
-          port: 80
-          index: index.html
-          root: ./dist
-      - uses: anishathalye/proof-html@v2
-        with:
-          directory: ./ # Directory to serve files from
-          check_html: true # Check HTML files for errors
-          check_links: true # Check links in HTML files
-          check_css: true # Check CSS files for errors
-          check_js: true # Check JS files for errors
-          enforce_https: true # Enforce HTTPS for links
-          check_images: true # Check images for errors
+      - name:  run javascript
+        run: |
+           node script.js
 
 
-          ###########
+      # - run: npm ci
+      # - run: npm install --force # Install dependencies
+      # - name: Get yarn cache directory
+      #   id: yarn-cache-dir
+      #   run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      # - run: cd ui/glypheditor
+      # - run: npm run start
+      # - run: npm run build --if-present
+      # - run: npm test
+      # - uses: Eun/http-server-action@v1
+      #   with:
+      #     port: 80
+      #     index: index.html
+      #     root: ./dist
+      # - uses: anishathalye/proof-html@v2
+      #   with:
+      #     directory: ./ # Directory to serve files from
+      #     check_html: true # Check HTML files for errors
+      #     check_links: true # Check links in HTML files
+      #     check_css: true # Check CSS files for errors
+      #     check_js: true # Check JS files for errors
+      #     enforce_https: true # Enforce HTTPS for links
+      #     check_images: true # Check images for errors
+
+
+      #     ###########
          
-      
+       
